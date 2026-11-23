@@ -152,6 +152,44 @@ def icon_capitol(d, x, y, s):
            width=2)
 
 
+def icon_ballot(d, x, y, s):
+    # a ballot box with a red check, beside a small rising bar chart
+    # --- ballot paper sliding into the slot, tilted slightly right ---
+    d.polygon([(x + 12, y + 2), (x + 24, y + 4), (x + 22, y + 22),
+               (x + 10, y + 20)], fill=(255, 255, 255), outline=INK)
+    # two ruled lines on the paper
+    d.line((x + 14, y + 8, x + 21, y + 9), fill=MUTED, width=1)
+    d.line((x + 14, y + 12, x + 21, y + 13), fill=MUTED, width=1)
+    # a small red tick on the paper itself
+    d.line((x + 14, y + 16, x + 17, y + 19, x + 21, y + 14), fill=RED,
+           width=2)
+    # --- slot across the top of the box, drawn over the paper's foot ---
+    d.rectangle((x + 6, y + 20, x + 30, y + 24), fill=INK)
+    # --- box body with a lid lip and a gold seal dot ---
+    d.rectangle((x + 4, y + 24, x + 32, y + 52), fill=BLUE)
+    d.rectangle((x + 4, y + 24, x + 32, y + 52), outline=INK, width=2)
+    d.line((x + 4, y + 28, x + 32, y + 28), fill=(255, 255, 255), width=1)
+    d.ellipse((x + 26, y + 30, x + 30, y + 34), fill=GOLD, outline=INK)
+    # --- big red check across the box front ---
+    d.line((x + 9, y + 38, x + 15, y + 45, x + 27, y + 30), fill=RED,
+           width=3)
+    # --- small rising bar chart on the right, three bars ---
+    base = y + 52
+    # vertical axis and baseline for the chart
+    d.line((x + 34, y + 20, x + 34, base), fill=MUTED, width=1)
+    d.line((x + 36, base, x + s - 4, base), fill=INK, width=2)
+    # shortest bar
+    d.rectangle((x + 36, base - 10, x + 41, base), fill=BLUE)
+    # middle bar
+    d.rectangle((x + 43, base - 18, x + 48, base), fill=GREEN)
+    # tallest bar, with an arrowhead on top
+    d.rectangle((x + 50, base - 26, x + 55, base), fill=RED)
+    d.polygon([(x + 50, base - 32), (x + 55, base - 32),
+               (x + 52, base - 27)], fill=RED)
+    # a faint tick under the shortest bar
+    d.line((x + 36, base + 1, x + 41, base + 1), fill=MUTED, width=1)
+
+
 def icon_castle(d, x, y, s):
     # Shuri Castle: tiered red roofs over white walls
     cx = x + s // 2
@@ -277,7 +315,7 @@ def main():
         ("WASHINGTON",
          "DEMOCRATS TAKE 258 HOUSE SEATS, BIGGEST SINCE 1992",
          "A 44-seat midterm gain gives Democrats their strongest "
-         "House showing in three decades.", icon_capitol),
+         "House showing in three decades.", icon_ballot),
         ("OKINAWA, JAPAN",
          "SHURI CASTLE REOPENS SEVEN YEARS AFTER FIRE",
          "The restored main hall opens to the public in Okinawa, "
